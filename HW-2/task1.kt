@@ -17,7 +17,7 @@ fun main(){
     println("Сумма цифр равна =  $result")
 
     //simple test
-    assert(sumOfDigits1(843) == 15)
+    if(sumOfDigits1(843) != 15) println("error task1")
 }
 
 fun sumOfDigits1(value: Int): Int{
