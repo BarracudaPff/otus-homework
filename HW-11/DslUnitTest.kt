@@ -103,6 +103,24 @@ class SqlDslUnitTest {
         checkSQL(expected, real)
     }
 
+    @Test
+    fun `when 'or' conditions are specified then they are respected`() {
+        val expected = "select (first_par, second_par) from table where (col_a = 4 and col_b !is null)"
+        
+        val real = query {
+            select("first_par", "second_par")
+            from("table")
+            where {
+                and {
+                    "col_a" eq 4
+                    "col_b" nonEq null
+                }
+            }
+        }
+
+        checkSQL(expected, real)
+    }
+
     private fun checkSQL(expected: String, sql: SqlSelectBuilder) {
         assertEquals(expected, sql.build())
     }
