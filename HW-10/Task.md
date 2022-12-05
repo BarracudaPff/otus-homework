@@ -7,18 +7,18 @@
    - Выполнять функцию `F` и возвращать её результат.
    - Выводить время конца работы функции `F`.
 3. Вам дан участок кода, который выполняет определенную функцию. Вам нужно убрать все переменные и реализовать тот же алгоритм, без помощи пременных и используя lambda-функции (пример ниже).
-  ```kotlin
+```kotlin
 fun knapsack(weights: IntArray, costs: IntArray, needed: Int): Int {
     val n = weights.size
     val dp = Array(needed + 1) { IntArray(n + 1) }
     for (j in 1..n) {
         for (w in 1..needed) {
             val el1 = dp[w][j - 1]
-            val el2 = dp[w - weights[j - 1]][j - 1] + costs[j - 1]
-
-            val el2Cost = costs[j - 1]
 
             if (weights[j - 1] <= w) {
+                val el2Cost = costs[j - 1]
+                val el2 = dp[w - weights[j - 1]][j - 1]
+
                 dp[w][j] = Math.max(el1, el2 + el2Cost)
             } else {
                 dp[w][j] = el1
@@ -27,4 +27,4 @@ fun knapsack(weights: IntArray, costs: IntArray, needed: Int): Int {
     }
     return dp[needed][n]
 }
-  ```
+```
